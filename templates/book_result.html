@@ -1,0 +1,18 @@
+{% extends "book_base.html" %}
+
+{% block content %}
+<table border="1">
+	<tr>
+	{%- for header in ['出发地', '目的地', '航班编号', '日期', '起飞时间', '降落时间'] %}
+	<th>{{ header }}</th>
+	{%- endfor %}
+	</tr>
+	{%- for row in results %}
+		<tr>
+		{%- for column in row %}
+			<td>{{ column }}</td>
+		{%- endfor %}
+		</tr>
+	{%- endfor %}
+</table>
+{% endblock %}
