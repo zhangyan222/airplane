@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<title>机票预订系统</title>
-<body>
-
+{% extends "base.html" %}
+{% block main %}
 <form name="input" action="/submit" method="post">
-	出发地： <input type="text" name="source" value="{{ source|default('') }}"><br>
-目的地： <input type="text" name="destination" value="{{ destination|default('') }}"><br>
-时间： <input type="text" name="date" value="{{ date|default('') }}">
+	出发地： <input type="text" name="source" value="{{ source|default('北京') }}"><br>
+目的地： <input type="text" name="destination" value="{{ destination|default('上海') }}"><br>
+时间： <input type="text" name="date" value="{{ date|default('2015-05-08') }}">
 <input type="submit" value="查询">
 </form> 
 <hr>
 {% block content %}{% endblock %}
-</body>
-</html>
+{% endblock %}

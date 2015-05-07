@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block main %}
+<p>
+付款成功！你的电子机票如下： <br>
+订单编号：{{ results['tid'] }} <br>
+航班编号：{{ results['flight'] }} <br>
+登记日期：{{ results['flight_date'] }} <br>
+价格：{{ results['prize'] }} <br>
+</p>
+<p>
+<a href="/book">继续订</a>
+</p>
+
+{% endblock %}

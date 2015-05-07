@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block main %}
+<p>
+请确认购买信息： <br>
+航班编号： {{ ano }} <br>
+日期：{{ date }} <br>
+价格：{{ prize }} <br>
+</p>
+<p>
+请选择支付方式：
+<form name="input" action="/pay" method="post">
+	<input type="hidden" name="ano" value="{{ ano }}">
+	<input type="hidden" name="date" value="{{ date }}">
+	<input type="radio" name="pay_type" value="fake">假装支付 
+	<br><input type="submit" value="支付">
+</form>
+</p>
+{% endblock %}
