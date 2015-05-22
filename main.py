@@ -33,19 +33,10 @@ def close_connection(exception):
 
 @app.route("/submit", methods=['POST'])
 def book_post():
-    results = query_db('select \
-                       printf("%s(%s)", d.airport_name, d.city) as depart, \
-                       printf("%s(%s)", a.airport_name, a.city) as arrive, \
-                       company_name, flight.flight_id as flight_id, \
-                       dtime, atime, \
-                       prize.prize as prize \
-                       from flight left join airport_city d on depart_id = d.airport_id \
-                       left join airport_city a on arrive_id = a.airport_id \
-                       left join company_name c on flight.company_id = c.company_id \
-                       left join prize \
-                       on flight.flight_id = prize.flight_id \
-                       where d.city = ? and a.city = ? and ? between prize.begin_time and prize.end_time; \
-             ', (request.form['source'], request.form['destination'], request.form['date']))
+    results = query_db('select * from plane_table where dcity = ? and acity = ? \
+                       and ? between begin_time and end_time;',
+                       (request.form['source'], request.form['destination'],
+                        request.form['date']))
     return render_template('book_result.html',
                            source = request.form['source'],
                            destination = request.form['destination'],
@@ -79,9 +70,16 @@ def pay():
                      one=True)['prize'];
     if request.form['pay_type'] == 'fake': # FIXME
         cur = get_db().cursor()
+        cur.execute('insert into passenger \
+                    values(NULL, ?, ?, ?, ?, ?, ?);',
+                    (request.form['name'], request.form['gender'],
+                     request.form['work'], request.form['card'],
+                     request.form['mail'], request.form['phone']))
+        passenger_id = query_db('select last_insert_rowid() \
+                       from passenger;', one=True)['last_insert_rowid()']
         cur.execute('insert into purchase \
-                    values(NULL, ?, ?, "fake", ?, 0);',
-                    (request.form['ano'], request.form['date'],
+                    values(NULL, ?, ?, ?, "fake", ?, 0);',
+                    (passenger_id, request.form['ano'], request.form['date'],
                      prize))
         tid = query_db('select last_insert_rowid() \
                        from purchase;', one=True)['last_insert_rowid()']
@@ -92,11 +90,9 @@ def pay():
 def fake_pay_success():
     cur = get_db().cursor()
     tid = unicode(request.args['tid'])
-    print type(tid)
-    print tid
     cur.execute('update purchase set purchased = 1 where tid = {}'.format(tid)); # ???
-    results = query_db('select * from purchase where tid = {}'.format(tid), one=True)
-    print results
+    results = query_db('select * from e_ticket \
+                       where tid = {}'.format(tid), one=True)
     get_db().commit()
     return render_template('fake_pay_success.html', results=results)
 

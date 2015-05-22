@@ -7,10 +7,20 @@
 价格：{{ prize }} <br>
 </p>
 <p>
-请选择支付方式：
 <form name="input" action="/pay" method="post">
 	<input type="hidden" name="ano" value="{{ ano }}">
 	<input type="hidden" name="date" value="{{ date }}">
+	请输入个人信息：
+	姓名：<input type="text" name="name" value=""><br>
+	性别：<select name="gender">
+		<option value="男">男</option>
+		<option value="女">女</option>
+	      </select><br>
+	工作单位：<input type="text" name="work" value=""><br>
+	身份证号码：<input type="text" name="card" value=""><br>
+	邮箱：<input type="text" name="mail" value=""><br>
+	手机号码：<input type="text" name="phone" value=""><br>
+	请选择支付方式：
 	<input type="radio" name="pay_type" value="fake">假装支付 
 	<br><input type="submit" value="支付">
 </form>

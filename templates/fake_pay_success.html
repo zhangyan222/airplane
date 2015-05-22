@@ -2,10 +2,17 @@
 {% block main %}
 <p>
 付款成功！你的电子机票如下： <br>
-订单编号：{{ results['tid'] }} <br>
+<!-- 订单编号：{{ results['tid'] }} <br> -->
 航班编号：{{ results['flight'] }} <br>
-登记日期：{{ results['flight_date'] }} <br>
-价格：{{ results['prize'] }} <br>
+航空公司：{{ results['company_name'] }} <br>
+登机日期：{{ results['flight_date'] }} <br>
+起飞时间：{{ results['dtime'] }} <br>
+出发地：{{ results['dairport'] }} <br>
+目的地：{{ results['aairport'] }} <br>
+姓名：{{results['name']}}<br>
+性别：{{results['gender']}}<br>
+身份证号：{{results['card']}}<br>
+<!--价格：{{ results['prize'] }} <br> -->
 </p>
 <p>
 <a href="/book">继续订</a>

@@ -35,9 +35,44 @@ create table prize (
 
 create table purchase (
 	tid integer primary key,
-	flight char(10),
+	passenger_id integer,
+	flight_id char(10),
 	flight_date date,
 	pay_method char(10),
 	prize real,
 	purchased boolean default false
 );
+
+create table passenger (
+	passenger_id integer primary key,
+	name char(50),
+	gender char(4),
+	work varchar,
+	card char(18),
+	mail varchar,
+	phone char(20)
+);
+
+create view e_ticket as 
+select tid, purchase.flight_id as flight, flight_date, dtime,
+	name, gender, card, company_name.company_name as company_name,
+	dcity.airport_name as dairport, acity.airport_name as aairport
+	from purchase
+left join passenger on purchase.passenger_id = passenger.passenger_id 
+left join flight on purchase.flight_id = flight.flight_id 
+left join airport_city dcity on flight.depart_id = dcity.airport_id 
+left join airport_city acity on flight.arrive_id = acity.airport_id 
+left join company_name on flight.company_id = company_name.company_id;
+
+create view plane_table as
+select d.airport_name as dairport, a.airport_name as aairport,
+	printf("%s(%s)", d.airport_name, d.city) as depart,
+	printf("%s(%s)", a.airport_name, a.city) as arrive,
+	company_name, flight.flight_id as flight_id, 
+	dtime, atime, prize.prize as prize,
+	d.city as dcity, a.city as acity,
+	prize.begin_time as begin_time, prize.end_time as end_time
+from flight left join airport_city d on depart_id = d.airport_id
+left join airport_city a on arrive_id = a.airport_id
+left join company_name c on flight.company_id = c.company_id
+left join prize on flight.flight_id = prize.flight_id;
