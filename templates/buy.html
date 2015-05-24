@@ -1,28 +1,96 @@
 {% extends "base.html" %}
 {% block main %}
 <p>
-请确认购买信息： <br>
-航班编号： {{ ano }} <br>
-日期：{{ date }} <br>
-价格：{{ prize }} <br>
-</p>
+<h2>确认购买信息</h2>
+<table class="pure-table">
+	<tbody>
+	<tr class="pure-table-odd">
+		<td>航班编号</td>
+		<td>{{ result['flight_id'] }}</td>
+	</tr>
+	<tr>
+		<td>登机日期</td>
+		<td>{{ date }}</td>
+	</tr>
+	<tr class="pure-table-odd">
+		<td>航空公司</td>
+		<td>{{ result['company_name'] }}</td>
+	</tr>
+	<tr>
+		<td>出发地</td>
+		<td>{{ result['depart'] }}</td>
+	</tr>
+	<tr class="pure-table-odd">
+		<td>目的地</td>
+		<td>{{ result['arrive'] }}</td>
+	</tr>
+	<tr cl>
+		<td>起飞时间</td>
+		<td>{{ result['dtime'] }}</td>
+	</tr>
+	<tr class="pure-table-odd">
+		<td>降落时间</td>
+		<td>{{ result['atime'] }}</td>
+	</tr>
+	<tr>
+		<td>价格</td>
+		<td>{{ result['prize'] }}</td>
+	</tr>
+	</tbody>
+</table>
+
 <p>
-<form name="input" action="/pay" method="post">
-	<input type="hidden" name="ano" value="{{ ano }}">
+<h2>输入个人信息</h2>
+<form class="pure-form pure-form-aligned" name="input" action="/pay" method="post">
+	<fieldset>
+	<input type="hidden" name="ano" value="{{ result['flight_id'] }}">
 	<input type="hidden" name="date" value="{{ date }}">
-	请输入个人信息：
-	姓名：<input type="text" name="name" value=""><br>
-	性别：<select name="gender">
-		<option value="男">男</option>
-		<option value="女">女</option>
-	      </select><br>
-	工作单位：<input type="text" name="work" value=""><br>
-	身份证号码：<input type="text" name="card" value=""><br>
-	邮箱：<input type="text" name="mail" value=""><br>
-	手机号码：<input type="text" name="phone" value=""><br>
-	请选择支付方式：
-	<input type="radio" name="pay_type" value="fake">假装支付 
-	<br><input type="submit" value="支付">
+		<div class="pure-control-group">
+			<label for="source">姓名</label>
+			<input type="text" name="name" value=""><br>
+		</div>
+
+		<div class="pure-control-group">
+			<label for="source">性别</label>
+			<select name="gender">
+				<option value="男">男</option>
+				<option value="女">女</option>
+			</select>
+		</div>
+
+		<div class="pure-control-group">
+			<label for="source">工作单位</label>
+			<input type="text" name="work" value=""><br>
+		</div>
+
+		<div class="pure-control-group">
+			<label for="source">身份证号码</label>
+			<input type="text" name="card" value=""><br>
+		</div>
+
+		<div class="pure-control-group">
+			<label for="source">邮箱</label>
+			<input type="text" name="mail" value=""><br>
+		</div>
+
+		<div class="pure-control-group">
+			<label for="source">手机号码</label>
+			<input type="text" name="phone" value=""><br>
+		</div>
+
+	<h2>选择支付方式</h2>
+		<div class="pure-controls">
+		<label for="pay_type_fake" class="pure-radio">
+			<input id="pay_type_fake" type="radio" name="pay_type" value="fake">
+			假装支付
+		</label>
+		<label for="pay_type_fake_email" class="pure-radio">
+			<input id="pay_type_fake_email" type="radio" name="pay_type" value="fake_email">
+			假装支付（使用Email）
+		</label>
+			<button type="submit" class="pure-button pure-button-primary">支付</button>
+		</div>
+	</fieldset>
 </form>
 </p>
 {% endblock %}

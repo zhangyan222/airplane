@@ -1,12 +1,16 @@
 {% extends "book_base.html" %}
 
 {% block content %}
-<table border="1">
+<table class="pure-table pure-table-horizontal">
+	<thead>
 	<tr>
 	{%- for header in ['航班编号', '航空公司', '出发地', '目的地', '起飞时间', '降落时间', '价格', '日期', '购买'] %}
 	<th>{{ header }}</th>
 	{%- endfor %}
 	</tr>
+	</thead>
+
+	<tbody>
 	{%- for row in results %}
 		<tr>
 		{%- for column in ['flight_id', 'company_name', 'depart', 'arrive', 'dtime', 'atime', 'prize' ] %}
@@ -17,10 +21,11 @@
 			<form name="input" action="/buy" method="post">
 				<input type="hidden" name="ano" value="{{ row['flight_id'] }}" >
 				<input type="hidden" name="date" value="{{ date }}" >
-				<input type="submit" value="购买">
+				<button class="pure-button">购买</button>
 			</form>
 		</td>
 		</tr>
 	{%- endfor %}
+	</tbody>
 </table>
 {% endblock %}

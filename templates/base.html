@@ -1,8 +1,42 @@
 <!DOCTYPE html>
 <html>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<title>机票预订系统</title>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+	<link rel="stylesheet" href="css/pure/pure-min.css">
+	
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/layouts/gallery-grid-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="css/layouts/gallery-grid.css">
+    <!--<![endif]-->
+  
+
+  
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/layouts/gallery-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="css/layouts/gallery.css">
+    <!--<![endif]-->
+
+	<title>机票预订系统</title>
+</head>
 <body>
+<div>
+    <div class="header">
+        <div class="pure-menu pure-menu-horizontal">
+            <a class="pure-menu-heading" href="/book">机票预订系统</a>
+
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">主页</a></li>
+            </ul>
+        </div>
+    </div>
+
 {% block main %}{% endblock %}
+
+</div>
 </body>
 </html>
