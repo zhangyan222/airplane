@@ -3,40 +3,56 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
-	<link rel="stylesheet" href="css/pure/pure-min.css">
+	<link rel="stylesheet" href="/css/pure/pure-min.css">
 	
-    <!--[if lte IE 8]>
-        <link rel="stylesheet" href="css/layouts/gallery-grid-old-ie.css">
-    <![endif]-->
-    <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="css/layouts/gallery-grid.css">
-    <!--<![endif]-->
+<!--[if lte IE 8]>
   
+    <link rel="stylesheet" href="/css/layouts/grids-responsive-old-ie-min.css">
+  
+<![endif]-->
+<!--[if gt IE 8]><!-->
+  
+    <link rel="stylesheet" href="/css/layouts/grids-responsive-min.css">
+  
+<!--<![endif]-->
 
-  
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="css/layouts/gallery-old-ie.css">
+        <link rel="stylesheet" href="/css/layouts/blog-old-ie.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="css/layouts/gallery.css">
+        <link rel="stylesheet" href="/css/layouts/blog.css">
     <!--<![endif]-->
 
 	<title>机票预订系统</title>
 </head>
 <body>
-<div>
-    <div class="header">
-        <div class="pure-menu pure-menu-horizontal">
-            <a class="pure-menu-heading" href="/book">机票预订系统</a>
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+            <h1 class="brand-title">机票预订系统</h1>
+            <h2 class="brand-tagline">在线预订机票</h2>
 
-            <ul class="pure-menu-list">
-                <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">主页</a></li>
-            </ul>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="pure-button" href="/">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="/book">订票</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+
 {% block main %}{% endblock %}
+
+    </div>
 
 </div>
 </body>
 </html>
+

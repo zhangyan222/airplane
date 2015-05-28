@@ -1,6 +1,14 @@
 {% extends "book_base.html" %}
 
 {% block content %}
+<div class="posts">
+	<h1 class="content-subhead">Result</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">查询结果</h2>
+		</header>
+		<div class="post-description">
+			<p>
 <table class="pure-table pure-table-horizontal">
 	<thead>
 	<tr>
@@ -28,4 +36,10 @@
 	{%- endfor %}
 	</tbody>
 </table>
+
+			</p>
+		</div>
+	</section>
+</div>
+
 {% endblock %}

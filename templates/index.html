@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="posts">
+	<h1 class="content-subhead">Introduce</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">系统介绍</h2>
+		</header>
+		<div class="post-description">
+			<p>
+　　本系统为机票查询与预订系统。旅行社把预订机票的旅客信息(姓名、性别、工作单位、身份证号码、旅行时间、旅行目的地等)输入进该系统，系统为旅客安排航班，印出取票通知和账单，旅客在飞机起飞的前凭取票通知和账单，通过支付宝链接交款取票，系统校对无误即印出机票给旅客。
+			</p>
+		</div>
+	</section>
+</div>
+
+<div class="posts">
+	<h1 class="content-subhead">BOOK TICKET</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">开始订票</h2>
+		</header>
+		<div class="post-description">
+			<p>
+<a href="/book">
+	<button type="submit" class="pure-button pure-button-primary">进入订票页面</button></a>
+</a>
+			</p>
+		</div>
+	</section>
+</div>
+
+{% endblock %}

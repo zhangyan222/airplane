@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block main %}
+
+<div class="posts">
+	<h1 class="content-subhead">Route</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">选择路线</h2>
+		</header>
+		<div class="post-description">
+			<p>
 <form class="pure-form pure-form-aligned" name="input" action="/submit" method="post">
 	<fieldset>
 		<div class="pure-control-group">
@@ -19,6 +28,10 @@
 		</div>
 	</fieldset>
 </form> 
-<hr>
+			</p>
+		</div>
+	</section>
+</div>
+
 {% block content %}{% endblock %}
 {% endblock %}

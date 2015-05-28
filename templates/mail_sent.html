@@ -1,10 +1,31 @@
 {% extends "base.html" %}
 {% block main %}
-<p>
-邮件已经发送到{{email}}，请注意查收。
-</p>
-<p>
-<a href="/book">继续订</a>
-</p>
+<div class="posts">
+	<h1 class="content-subhead">Mail Sent</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">邮件已发送</h2>
+		</header>
+		<div class="post-description">
+			<p>
+			邮件已经发送到{{email}}，请注意查收。
+			</p>
+		</div>
+	</section>
+</div>
+
+<div class="posts">
+	<h1 class="content-subhead">Tips</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">返回提示</h2>
+		</header>
+		<div class="post-description">
+			<p>
+			你可以<a href="/book">重新开始订票</a>，或者关闭页面。
+			</p>
+		</div>
+	</section>
+</div>
 
 {% endblock %}

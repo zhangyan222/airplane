@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% block main %}
-<p>
-付款成功！你的电子机票如下： <br>
+
+<div class="posts">
+	<h1 class="content-subhead">Result</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">交易结果</h2>
+		</header>
+		<div class="post-description">
+			<p>
+			付款成功！你的电子机票如下：</p>
+			<p>
 <table class="pure-table">
 	<tbody>
 	<tr class="pure-table-odd">
@@ -41,9 +50,25 @@
 		<td>{{ results['card'] }}</td>
 	</tr>
 	</tbody>
+</table>
 </p>
-<p>
-<a href="/book">继续订</a>
-</p>
+			</p>
+		</div>
+	</section>
+</div>
+
+<div class="posts">
+	<h1 class="content-subhead">Tips</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">返回提示</h2>
+		</header>
+		<div class="post-description">
+			<p>
+			你可以<a href="/book">重新开始订票</a>，或者关闭页面。
+			</p>
+		</div>
+	</section>
+</div>
 
 {% endblock %}

@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block main %}
-<p>
-<h2>确认购买信息</h2>
+
+<div class="posts">
+	<h1 class="content-subhead">Check</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">确认购买信息</h2>
+		</header>
+		<div class="post-description">
+			<p>
 <table class="pure-table">
 	<tbody>
 	<tr class="pure-table-odd">
@@ -38,9 +45,19 @@
 	</tr>
 	</tbody>
 </table>
+			</p>
+		</div>
+	</section>
+</div>
 
-<p>
-<h2>输入个人信息</h2>
+<div class="posts">
+	<h1 class="content-subhead">Personal Infomation</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">输入个人信息</h2>
+		</header>
+		<div class="post-description">
+			<p>
 <form class="pure-form pure-form-aligned" name="input" action="/pay" method="post">
 	<fieldset>
 	<input type="hidden" name="ano" value="{{ result['flight_id'] }}">
@@ -78,19 +95,36 @@
 			<input type="text" name="phone" value=""><br>
 		</div>
 
-	<h2>选择支付方式</h2>
+			</p>
+		</div>
+	</section>
+</div>
+
+<div class="posts">
+	<h1 class="content-subhead">Payment</h1>
+	<section class="post">
+		<header class="post-header">
+			<h2 class="post-title">选择付款方式</h2>
+		</header>
+		<div class="post-description">
+			<p>
 		<div class="pure-controls">
 		<label for="pay_type_fake" class="pure-radio">
 			<input id="pay_type_fake" type="radio" name="pay_type" value="fake">
-			假装支付
+			假装支付<br>
 		</label>
 		<label for="pay_type_fake_email" class="pure-radio">
 			<input id="pay_type_fake_email" type="radio" name="pay_type" value="fake_email">
-			假装支付（使用Email）
+			假装支付（使用Email）<br>
 		</label>
+			</p>
+			<p>
 			<button type="submit" class="pure-button pure-button-primary">支付</button>
+			</p>
 		</div>
 	</fieldset>
+		</div>
+	</section>
+</div>
 </form>
-</p>
 {% endblock %}
