@@ -117,6 +117,10 @@ def fake_pay_success():
 def css(path):
     return send_from_directory('css', path)
 
+@app.route('/js/<path:path>')
+def js(path):
+    return send_from_directory('js', path)
+
 @app.route('/')
 def index():
     return render_template('index.html')

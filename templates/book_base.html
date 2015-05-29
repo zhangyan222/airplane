@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/css/jquery.datepick.css"> 
+<link rel="stylesheet" href="/css/citySelector.css">
+<script type="text/javascript" src="/js/jquery.plugin.js"></script> 
+<script type="text/javascript" src="/js/jquery.datepick.js"></script>
+<script type="text/javascript" src="/js/citySelector.js"></script>
+{% endblock %}
 {% block main %}
 
 <div class="posts">
@@ -13,15 +20,15 @@
 	<fieldset>
 		<div class="pure-control-group">
 			<label for="source">出发地</label>
-			<input type="text" name="source" value="{{ source|default('北京') }}">
+			<input type="text" class="cityinput" id="dcitySelect" name="source" value="{{ source|default('北京') }}">
 		</div>
 		<div class="pure-control-group">
 			<label for="source">目的地</label>
-			<input type="text" name="destination" value="{{ destination|default('上海') }}">
+			<input type="text" class="cityinput" id="acitySelect" name="destination" value="{{ destination|default('上海') }}">
 		</div>
 		<div class="pure-control-group">
 			<label for="source">时间</label>
-			<input type="text" name="date" value="{{ date|default('2015-05-08') }}">
+			<input type="text" id="datepicker" name="date" value="{{ date|default('2015-05-08') }}">
 		</div>
 		<div class="pure-controls">
 			<button class="pure-button pure-button-primary">查询</button>
@@ -35,3 +42,12 @@
 
 {% block content %}{% endblock %}
 {% endblock %}
+
+{% block tail %}
+<script>
+$('#datepicker').datepick({dateFormat: 'yyyy-mm-dd'});
+var dcs=new Vcity.CitySelector({input:'dcitySelect'});
+var acs=new Vcity.CitySelector({input:'acitySelect'});
+</script>
+{% endblock %}
+
