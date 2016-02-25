@@ -30,7 +30,7 @@ create table prize (
 	prize real,
 	begin_time date,
 	end_time date,
-	operate_time datetime default CURRENT_TIMESTAMP NOT NULL primary key
+	operate_time datetime default CURRENT_TIMESTAMP NOT NULL
 );
 
 create table purchase (

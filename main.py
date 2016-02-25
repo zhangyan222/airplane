@@ -1,12 +1,16 @@
 #!/usr/bin/python
 ## encoding: utf-8
-import sqlite3
+import re
+import urllib
 import thread
+import sqlite3
+import datetime
 import ConfigParser
+from flask import g
 from flask import Flask
 from flask import render_template
 from flask import send_from_directory
-from flask import request, redirect, g
+from flask import request, redirect, abort
 
 from send_mail import simply_sendmail
 
@@ -42,6 +46,13 @@ def close_connection(exception):
 
 @app.route("/submit", methods=['POST'])
 def book_post():
+    try:
+        assert(request.form['source'] != '')
+        assert(request.form['destination'] != '')
+        date = datetime.datetime.strptime(request.form['date'], '%Y-%m-%d')
+    except (AssertionError, ValueError, KeyError):
+        abort(400)
+
     results = query_db('select * from plane_table where dcity = ? and acity = ? \
                        and ? between begin_time and end_time;',
                        (request.form['source'], request.form['destination'],
@@ -87,7 +98,13 @@ def pay():
                    from purchase;', one=True)['last_insert_rowid()']
     get_db().commit() # ?
     if request.form['pay_type'] == 'fake': # FIXME
-        return redirect("/fake_pay_success?tid={}".format(tid))
+        return render_template("alipay.html",
+                               prize=prize,
+                               title=u'机票-{}-{}'.format(
+                                   request.form['ano'],
+                                   request.form['date']),
+                               tid=tid,
+                               )
     elif request.form['pay_type'] == 'fake_email': # FIXME
         thread.start_new_thread(simply_sendmail, (
             config.get("mail", "smtp_server"),
@@ -97,11 +114,28 @@ def pay():
             request.form['mail'],
             config.get("mail", "subject").decode("utf-8"),
             config.get("mail", "content").format(
-                config.get("main", "domain"), tid)
-                                ))
+                config.get("main", "domain"),
+                urllib.urlencode({'tid':tid,
+                                  'prize':prize,
+                                  'date':request.form['date'],
+                                  'ano':request.form['ano']}
+                )
+                                )))
         return render_template('mail_sent.html',
                                email=request.form['mail'])
 
+
+@app.route("/mail_pay", methods=['GET'])
+def mail_pay():
+    tid = unicode(request.args['tid'])
+    prize = unicode(request.args['prize'])
+    ano = unicode(request.args['ano'])
+    date = unicode(request.args['date'])
+    return render_template("alipay.html",
+                            prize=prize,
+                            title=u'机票-{}-{}'.format(ano, date),
+                            tid=tid,
+                            )
 
 @app.route("/fake_pay_success", methods=['GET']) # FIXME
 def fake_pay_success():
@@ -120,6 +154,10 @@ def css(path):
 @app.route('/js/<path:path>')
 def js(path):
     return send_from_directory('js', path)
+
+@app.route('/alipay_files/<path:path>')
+def alipay_files(path):
+    return send_from_directory('alipay_files', path)
 
 @app.route('/')
 def index():
